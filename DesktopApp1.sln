@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopApp1", "DesktopApp1\DesktopApp1.csproj", "{0D67B97A-197B-4A43-9CE0-7253A2CAEE3C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeekerSearch", "DesktopApp1\SeekerSearch.csproj", "{0D67B97A-197B-4A43-9CE0-7253A2CAEE3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
