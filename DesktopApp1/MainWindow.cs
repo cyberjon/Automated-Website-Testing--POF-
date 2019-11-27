@@ -148,7 +148,7 @@ namespace SeekerSearch
 
             //Nav to websight
             ToolStrip.Text = "Going to website...";
-            driver.Url = "https://www.pof.com";
+            driver.Url = "https://www.pof.com/login.aspx";
 
             //Login Username
             IWebElement UserName = driver.FindElementById("logincontrol_username");
@@ -245,7 +245,7 @@ namespace SeekerSearch
 
                 string sTheLongMessage = "I am an average guy with an average life – I am down to earth, but there was a sadness in my heart. I was missing something. Today, I realized exactly what I was missing. It was you.  Your beauty transcends the limiting instrumentality of language itself.  I surrender to your judgements sweet kiss";
 
-                
+
                 // go back to the previous page 
                 driver.Navigate().Back();
                 // get the sendmessage box and type longer message
@@ -267,12 +267,19 @@ namespace SeekerSearch
                 File.WriteAllLines("Contacts.txt", File.ReadLines("Contacts.txt").Where(l => l != ProfileUserName).ToList());
                 //close the program.
                 Environment.Exit(1);
-                
+
             }
             else if (GetTextOnPage.Text.Contains("accepts messages only from people who have certain profile attributes"))
             {
                 ToolStrip.Text = "Profile only requires certain profile attributes.";
                 Console.WriteLine("Profile only requires certain profile attributes.");
+                driver.Url = "https://www.pof.com";
+                return false;
+            }
+            else if (GetTextOnPage.Text.Contains("prefers to receive messages from users who live nearby."))
+            {
+                ToolStrip.Text = "prefers to receive messages from users who live nearby.";
+                Console.WriteLine("prefers to receive messages from users who live nearby.");
                 driver.Url = "https://www.pof.com";
                 return false;
             }
@@ -304,7 +311,7 @@ namespace SeekerSearch
             // Select Miles Drop down and set it to 10.
             IWebElement miles = driver.FindElementByName("miles");
             SelectElement SelectDistance = new SelectElement(miles);
-            SelectDistance.SelectByText("50 miles");
+            SelectDistance.SelectByText("25 miles");
             
             //Click Refine Matches
             string RefineSearchXpath = "//*[@id=\"form1\"]/center/table/tbody/tr/td[8]/input";
@@ -389,9 +396,14 @@ namespace SeekerSearch
         {
             //Find the embeded firefox.exe 
             Console.WriteLine(Directory.GetCurrentDirectory());
+            FirefoxProfile profile = new FirefoxProfile(@"C:\Users\GreatMindsInside\Desktop\FireFox Profile");
+            FirefoxOptions options = new FirefoxOptions();
+            options.Profile = profile;
+
+            profile.SetPreference("permissions.default.image", 2);
             FirefoxDriver driver = new FirefoxDriver(Directory.GetCurrentDirectory());
             // Minimize Browser Window
-            driver.Manage().Window.Minimize();
+            // driver.Manage().Window.Minimize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
 
             return driver;
